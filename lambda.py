@@ -17,7 +17,7 @@ s3w = boto3.resource('s3')
 def get_s3(sid):
     track_data = {}
     try:
-        obj = s3w.Object('pet-tracker-alexa', ''+sid+'.json')
+        obj = s3w.Object('hamish.cephe.us', ''+sid+'.json')
         json_input = obj.get()['Body'].read()
 
         track_data = json.loads(json_input)
@@ -38,7 +38,7 @@ def put_s3(sid, intent, pet_type):
     track_data[intent][pet_type] = time.time()
 
     track = json.dumps(track_data, ensure_ascii=False)
-    s3w.Bucket('pet-tracker-alexa').put_object(Key=''+sid+'.json', Body=track)
+    s3w.Bucket('hamish.cephe.us').put_object(Key=''+sid+'.json', Body=track)
 
 # --------------- Helpers that build all of the responses ----------------------
 
